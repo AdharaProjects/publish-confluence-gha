@@ -13,6 +13,8 @@ RUN apt update && apt install default-jre -y
 
 COPY plantuml.jar /plantuml.jar
 
-COPY entrypoint entrypoint
+COPY entrypoint entrypoint.sh
 
-ENTRYPOINT ["/entrypoint"]
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
