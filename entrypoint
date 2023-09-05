@@ -1,0 +1,15 @@
+#!/bin/sh -l
+
+# install requirements.txt if it exists
+if [ "$INPUT_REQUIREMENTSFILE" ]; then
+  pip install --user -r $INPUT_REQUIREMENTSFILE
+elif [ -f requirements.txt ]; then
+  pip install --user -r requirements.txt
+fi
+
+if ! [ -z "$INPUT_DOCSDIR" ]; then
+  cd $INPUT_DOCSDIR
+fi
+
+make confluence \
+  SPHINXOPTS="-D confluence_server_user=$INPUT_USERNAME -D confluence_server_pass=$INPUT_APITOKEN"
